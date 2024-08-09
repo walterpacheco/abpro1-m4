@@ -2,7 +2,8 @@ body{
     font-family: "Josefin Sans", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    background-image: url('');}
+    background-image: url('../img/aduana.jpg');
+}
 
 .resumen{
     background-color: rgba(255, 255, 255, 0.7); 

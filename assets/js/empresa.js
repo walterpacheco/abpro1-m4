@@ -46,7 +46,13 @@ export class Importacion extends Empresa {
         this.#idProducto = idProducto;
     }
     getnombreProducto() {
-        return this.#anio;
+        return this.#nombreProducto;
+    }
+    setnumeroProducto(numeroProducto) {
+        this.#nombreProducto = nombreProducto;
+    }
+    getnombreProducto() {
+        return this.#nombreProducto;
     }
     // Método para agregar una nueva importación
     calcularPrecio() {

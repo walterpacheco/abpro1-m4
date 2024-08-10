@@ -2,7 +2,9 @@ body{
     font-family: "Josefin Sans", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    background-image: url('../img/aduana.jpg');
+    background-image: url(img/aduana.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +17,7 @@ body{
 }
 
 form{
-    background: #fff;
+    background-color: rgba(239, 239, 241,0.7);
     padding: 20px;
     margin: 20px 0;
     box-shadow: 0 0 10px rgb(21, 21, 21, 0.1);

@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Aduana</title>
 </head>
 <body>
     <h1 class="titulo">Aduana Chilena</h1>
+
     <form id="empresaForm">
         <h2>Empresa</h2>
         <label for="idEmpresa">ID Empresa:</label>
         <input type="number" id="idEmpresa" required><br>
         <label for="nombreEmpresa">Nombre Empresa:</label>
         <input type="text" id="nombreEmpresa" required><br>
-        <label for="rutEmpresa">Rut Empresa:</label>
-        <input type="number" id="rutEmpresa" required><br>
+        <label for="rutEmpresa">RUT Empresa:</label>
+        <input type="text" id="rutEmpresa" required><br>
         <button type="submit">Ingresar Empresa</button>
     </form>
+
+    <h2>Lista de Empresas</h2>
+    <table id="tablaEmpresas">
+        <tr>
+            <th>ID Empresa</th>
+            <th>Nombre</th>
+            <th>RUT</th>
+        </tr>
+    </table>
+
     <form id="importacionForm">
         <h2>Importación</h2>
+        <label for="empresaSelect">Seleccionar Empresa:</label>
+        <select id="empresaSelect" required>
+            <option value="">Seleccione una empresa</option>
+        </select><br>
         <label for="idImportacion">ID Importación:</label>
         <input type="number" id="idImportacion" required><br>
         <label for="producto">Producto:</label>
@@ -32,11 +46,17 @@
         <button type="submit">Ingresar Importación</button>
     </form>
 
-    <h2 class="resumen">Resumen</h2>
-    <p id="totalImportaciones"></p>
-    <p id="sumatotalImportaciones"></p>
+    <h2>Lista de Importaciones</h2>
+    <table id="tablaImportaciones">
+        <tr>
+            <th>ID Importación</th>
+            <th>Producto</th>
+            <th>Número de Productos</th>
+            <th>Precio Unitario</th>
+            <th>Total</th>
+        </tr>
+    </table>
 
-
-<script type="module" src="./assets/js/main.jss"></script>
+<script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>

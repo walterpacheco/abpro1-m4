@@ -1,38 +1,26 @@
-import { Empresa } from './empresa';
+import { Empresa } from './empresa.js';
+import { Importacion } from './importacion.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('#empresaForm');
-    const tabla = document.querySelector('#importacionForm');
+    const empresaForm = document.querySelector('#empresaForm');
+    const importacionForm = document.querySelector('#importacionForm');
+    const tablaEmpresas = document.querySelector('#tablaEmpresas');
+    const tablaImportaciones = document.querySelector('#tablaImportaciones');
+    const empresaSelect = document.querySelector('#empresaSelect');
 
-    form.addEventListener('submit', (event) => {
+    const empresas = [];
+
+    empresaForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const idProducto = form.idProducto.value;
-        const nombreProducto = form.nombreProducto.value;
-        const numeroProducto = form.numeroProducto.value;
-        const precioProducto = parseInt(form.precioProducto.value);
+        const idEmpresa = empresaForm.idEmpresa.value;
+        const nombreEmpresa = empresaForm.nombreEmpresa.value;
+        const rutEmpresa = empresaForm.rutEmpresa.value;
 
-        const nuevoEmpresa = new Empresa(idProducto, nombreProducto, numeroProducto, precioProducto);
+        const nuevaEmpresa = new Empresa(idEmpresa, nombreEmpresa, rutEmpresa);
+        empresas.push(nuevaEmpresa);
 
-        const row = document.createElement('tr');
-        row.innerHTML = `
-        <td>${nuevoEmpresa.getIdEmpresao}</td>
-        <td>${nuevoEmpresa.getNombre}</td>
-        <td>${nuevoEmpresa.getRut}</td>
-    `;
-        tabla.appendChild(row);
-
-        form.reset();
-    });
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const idProducto = form.idProducto.value;
-        const nombreProducto = form.nombreProducto.value;
-        const anio = parseInt(form.anio.value);
-
-        const nuevoAuto = new Auto(marca, modelo, anio);
-
+        // Agregar la nueva empresa a la tabla de empresas
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${nuevaEmpresa.getIdEmpresa()}</td>
@@ -41,11 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         tablaEmpresas.appendChild(row);
 
+        // Agregar la nueva empresa al select de importaciones
+        const option = document.createElement('option');
+        option.value = nuevaEmpresa.getIdEmpresa();
+        option.text = `${nuevaEmpresa.getNombre()} (ID: ${nuevaEmpresa.getIdEmpresa()})`;
+        empresaSelect.appendChild(option);
+
         empresaForm.reset();
     });
-    
+
     importacionForm.addEventListener('submit', (event) => {
         event.preventDefault();
+
+        const idEmpresaSeleccionada = empresaSelect.value;
+        const empresaSeleccionada = empresas.find(empresa => empresa.getIdEmpresa() === idEmpresaSeleccionada);
+
+        if (!empresaSeleccionada) {
+            alert('Debe seleccionar una empresa válida antes de registrar una importación.');
+            return;
+        }
 
         const idImportacion = importacionForm.idImportacion.value;
         const producto = importacionForm.producto.value;
@@ -53,14 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const precioUnitario = parseInt(importacionForm.precioUnitario.value);
 
         const nuevaImportacion = new Importacion(idImportacion, producto, numeroProductos, precioUnitario);
+        empresaSeleccionada.agregarImportacion(nuevaImportacion);
 
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${nuevaImportacion.getIdProducto()}</td>
-            <td>${nuevaImportacion.nombreProducto}</td>
-            <td>${nuevaImportacion.numeroProducto}</td>
-            <td>${nuevaImportacion.precioProducto}</td>
-            <td>${nuevaImportacion.calcularPrecio()}</td>
+            <td>${nuevaImportacion.getIdImportacion()}</td>
+            <td>${nuevaImportacion.getProducto()}</td>
+            <td>${nuevaImportacion.getNumeroProductos()}</td>
+            <td>${nuevaImportacion.getPrecioUnitario()}</td>
+            <td>${nuevaImportacion.calcularTotal()}</td>
         `;
         tablaImportaciones.appendChild(row);
 
